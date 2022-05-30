@@ -6,19 +6,18 @@ namespace Sacristan.Utils
 {
     public abstract class SingletonScriptableObject<T> : ScriptableObject where T : SingletonScriptableObject<T>
     {
-        private static bool instanceFound;
-        private static T instance;
+        static T instance;
 
         public static bool Exists
         {
             get
             {
                 FindInstance();
-                return instanceFound;
+                return instance != null;
             }
         }
 
-        public static T I
+        public static T Instance
         {
             get
             {
@@ -27,12 +26,9 @@ namespace Sacristan.Utils
             }
         }
 
-        private static void FindInstance()
+        static void FindInstance()
         {
-            if (instanceFound)
-            {
-                return;
-            }
+            if (instance != null) return;
 
             T[] assets = Resources.LoadAll<T>("");
             if (assets == null || assets.Length < 1)
@@ -44,7 +40,6 @@ namespace Sacristan.Utils
                 throw new System.Exception($"There are multiple {typeof(T)} instances!");
             }
 
-            instanceFound = true;
             instance = assets[0];
         }
     }

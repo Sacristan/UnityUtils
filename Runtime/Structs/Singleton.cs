@@ -7,8 +7,8 @@ namespace Sacristan.Utils
         private static T instance;
 
         #region Properties
-        public static T Instance { get { return instance; } }
-        public static bool IsInitialized { get { return instance != null; } }
+        public static T Instance => instance;
+        public static bool IsInitialized => instance != null;
         #endregion
 
         #region MonoBehaviour
@@ -16,7 +16,7 @@ namespace Sacristan.Utils
         {
             if (instance != null)
             {
-                Debug.LogErrorFormat("Trying to instantiate a second instance of singleton class {0}", GetType().Name);
+                Debug.LogErrorFormat("Trying to instantiate a second instance of singleton class {0}", typeof(T));
             }
             else
             {
