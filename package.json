@@ -1,0 +1,16 @@
+{
+    "name": "com.sacristan.utils",
+    "version": "1.0.0",
+    "displayName": "Sacristan Utils",
+    "description": "Dev Utils",
+    "unity": "2018.1",
+    "keywords": [
+        "Dev",
+        "Utils"
+    ],
+    "author": {
+        "name": "Ģirts 'Sacristan' Ķesteris",
+        "email": "girts.kesteris@gmail.com",
+        "url": "https://girtskesteris.xyz"
+    }
+}
