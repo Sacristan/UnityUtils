@@ -6,14 +6,28 @@ namespace Sacristan.Utils
 {
     public static class MonoBehaviourExtensions
     {
-        public static void InvokeSafe(this MonoBehaviour behavior, System.Action method, float delayInSeconds)
+        public static Coroutine StartCoroutineIfActive(this MonoBehaviour behaviour, IEnumerator routine)
         {
-            behavior.StartCoroutine(InvokeSafeRoutine(method, delayInSeconds));
+            if (behaviour == null)
+            {
+                Debug.Log("MonoBehaviourExtensions.StartCoroutineIfActive received GameObject is null");
+            }
+            else
+            {
+                if (behaviour.enabled && behaviour.gameObject.activeSelf) return behaviour?.StartCoroutine(routine);
+            }
+
+            return null;
         }
 
-        public static void InvokeRepeatingSafe(this MonoBehaviour behavior, System.Action method, float delayInSeconds, float repeatRateInSeconds)
+        public static void InvokeSafe(this MonoBehaviour behaviour, System.Action method, float delayInSeconds)
         {
-            behavior.StartCoroutine(InvokeSafeRepeatingRoutine(method, delayInSeconds, repeatRateInSeconds));
+            behaviour.StartCoroutine(InvokeSafeRoutine(method, delayInSeconds));
+        }
+
+        public static void InvokeRepeatingSafe(this MonoBehaviour behaviour, System.Action method, float delayInSeconds, float repeatRateInSeconds)
+        {
+            behaviour.StartCoroutine(InvokeSafeRepeatingRoutine(method, delayInSeconds, repeatRateInSeconds));
         }
 
         private static IEnumerator InvokeSafeRepeatingRoutine(System.Action method, float delayInSeconds, float repeatRateInSeconds)
